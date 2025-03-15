@@ -114,8 +114,22 @@ while True:
             resp_menu_3 = int(input('Desja atualizar mais algum dado da tabela?\n1-SIM\n2-NAO\nR: '))
 
 
-    # # EXCLUSÃO DE DADOS
-    # elif menu_select == 4:
+    # EXCLUSÃO DE DADOS
+    elif menu_select == 4:
+        resp_menu_4 = True
+        while resp_menu_4 == True:
+            exibir_dados(dados)
+
+            # Definindo index que será alterado
+            idx = int(input('\nEscolha os dados que deseja excluir da tabela: '))
+
+            # Atualização dos dados da lista
+            del dados['CULTURA'][idx] 
+            del dados['AREA'][idx]
+            del dados['INSUMOS'][idx] 
+
+            # Atualização variavel de loop (utilizado para determinar se devemos continuar)
+            resp_menu_3 = int(input('Desja atualizar mais algum dado da tabela?\n1-SIM\n2-NAO\nR: '))
 
     # # EXIT
     elif menu_select == 5:
