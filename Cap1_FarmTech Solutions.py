@@ -24,50 +24,49 @@ def exibir_dados(dicionario):
 #FUNÇÃO DESTINADA CALCULAR A CULTURA
 def inserir_dados(loop: bool = True): 
     # Declarando variaveis globais
-    global area, insumo, manejo_insumo, resp, cultura
+    global area, insumo, manejo_insumo, resp_menu_1, cultura
 
-    # Declarando variavel de loop
-    resp = 1
+    try:
+        # Declarando variavel de loop
+        resp_menu_1 = True
 
-    # Input da cultura a ser utilizada
-    cultura = input('DIGITE A CULTURA QUE DESEJA INCLUIR:\nMILHO\nSOJA\nR:').upper()
+        # Input da cultura a ser utilizada
+        cultura = input('DIGITE A CULTURA QUE DESEJA INCLUIR:\nMILHO\nSOJA\nR:').upper()
 
-    while resp == 1:
+        while resp_menu_1 == True:
 
-        # MILHO
-        if cultura == 'MILHO':
-            
-            # Aviso
-            print('\nA cultura escolhida foir o milho.\nA cultura de milho tem a caracteristica de ser cultivada em uma area quadrada com fertilizante.\nA cada m² serão aplicados 100g de fertilizante.')
-
-            # CALCULE A AREA PLANTADA 
-            m = int(input('DIGITE EM METROS O TAMANHO DE UM DOS LADOS DA AREA PARA CALCULAR A AREA EM M²: '))
-            area = round(m ** 2, 2)
-
-            # CALCULE O MANEJO DE INSUMOS
-            insumo = 100
-            manejo_insumo = round(area * insumo,2)
-
-        # SOJA
-        elif cultura == 'SOJA':
-
-            # Aviso
-            print('\nA cultura escolhida foir o soja.\nA cultura de soja tem a caracteristica de ser cultivada em uma area redonda com fertilizante.\nA cada m² serão pulverizados 500ml de defensivo de soja.')
-
-            # CALCULE A AREA PLANTADA
-            r = int(input('DIGITE EM METROS O RAIO DA AREA: '))
-            area = pi * r ** 2
-
-            # CALCULE O MANEJO DE INSUMOS
-            insumo = 500
-            manejo_insumo = round(area * insumo,2)
-
+            # MILHO
+            if cultura == 'MILHO':
                 
-        
-        else:
-            print('\nDIGITE UMA CULTURA VALIDA')
+                # Aviso
+                print('\nA cultura escolhida foir o milho.\nA cultura de milho tem a caracteristica de ser cultivada em uma area quadrada com fertilizante.\nA cada m² serão aplicados 100g de fertilizante.')
 
-        resp = int(input('\nDESEJA INSERIR MAIS DADOS\n1-SIM\n2-NAO\nR: ')) if loop == True else False
+                # CALCULE A AREA PLANTADA 
+                m = int(input('DIGITE EM METROS O TAMANHO DE UM DOS LADOS DA AREA PARA CALCULAR A AREA EM M²: '))
+                area = round(m ** 2, 2)
+
+                # CALCULE O MANEJO DE INSUMOS
+                insumo = 100
+                manejo_insumo = round(area * insumo,2)
+
+            # SOJA
+            elif cultura == 'SOJA':
+
+                # Aviso
+                print('\nA cultura escolhida foir o soja.\nA cultura de soja tem a caracteristica de ser cultivada em uma area redonda com fertilizante.\nA cada m² serão pulverizados 500ml de defensivo de soja.')
+
+                # CALCULE A AREA PLANTADA
+                r = int(input('DIGITE EM METROS O RAIO DA AREA: '))
+                area = pi * r ** 2
+
+                # CALCULE O MANEJO DE INSUMOS
+                insumo = 500
+                manejo_insumo = round(area * insumo,2)
+                
+
+            resp_menu_1 = int(input('\nDESEJA INSERIR DADOS\n1-SIM\n2-NAO\nR: ')) if loop == True else False
+    except ValueError as error:
+        print('Algo não ocorreu como deveria.\nTente novamente')
 
 
 while True:
@@ -94,17 +93,30 @@ while True:
     # ATUALIZAÇÃO DE DADOS
     elif menu_select == 3:
 
-        exibir_dados(dados)
+        # Definindo variavel de LOOP
+        resp_menu_3 = 1
 
-        idx = int(input('\nEscolha os dados que deseja alterar: '))
-        inserir_dados(False)
+        # Looping de atualização de dados
+        while resp_menu_3 == True:
+            exibir_dados(dados)
 
-        dados['CULTURA'][idx] = cultura
-        dados['AREA'][idx] = area
-        dados['INSUMOS'][idx] = manejo_insumo
+            # Definindo index que será alterado
+            idx = int(input('\nEscolha os dados que deseja alterar: '))
+
+            # Definido novos dados
+            inserir_dados(False)
+
+            # Atualização dos dados da lista
+            dados['CULTURA'][idx] = cultura
+            dados['AREA'][idx] = area
+            dados['INSUMOS'][idx] = manejo_insumo
+
+            resp_menu_3 = int(input('Desja atualizar mais algum dado da tabela?\n1-SIM\n2-NAO\nR: '))
+
 
     # # EXCLUSÃO DE DADOS
     # elif menu_select == 4:
+
     # # EXIT
     elif menu_select == 5:
         exit()
