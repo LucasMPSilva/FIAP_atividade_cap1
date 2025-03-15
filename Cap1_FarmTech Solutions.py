@@ -22,7 +22,7 @@ def exibir_dados(dicionario):
         print(f"|{idx:<4} | {dicionario['CULTURA'][idx]:<5} | {dicionario['AREA'][idx]:<12} | {dicionario['INSUMOS'][idx]:<15} |")
 
 #FUNÇÃO DESTINADA CALCULAR A CULTURA
-def inserir_dados(): 
+def inserir_dados(loop: bool = True): 
     # Declarando variaveis globais
     global area, insumo, manejo_insumo, resp, cultura
 
@@ -67,7 +67,8 @@ def inserir_dados():
         else:
             print('\nDIGITE UMA CULTURA VALIDA')
 
-        resp = int(input('\nDESEJA INSERIR MAIS DADOS\n1-SIM\n2-NAO\nR: '))
+        resp = int(input('\nDESEJA INSERIR MAIS DADOS\n1-SIM\n2-NAO\nR: ')) if loop == True else False
+
 
 while True:
 # LIMPEZA DO TERMINAL
@@ -92,12 +93,15 @@ while True:
 
     # ATUALIZAÇÃO DE DADOS
     elif menu_select == 3:
-        idx = int(input('Escolha os dados que deseja alterar: '))
-        inserir_dados()
 
-        dados['CULTURA'][idx].append(cultura)
-        dados['AREA'][idx].append(area)
-        dados['INSUMOS'][idx].append(manejo_insumo)
+        exibir_dados(dados)
+
+        idx = int(input('\nEscolha os dados que deseja alterar: '))
+        inserir_dados(False)
+
+        dados['CULTURA'][idx] = cultura
+        dados['AREA'][idx] = area
+        dados['INSUMOS'][idx] = manejo_insumo
 
     # # EXCLUSÃO DE DADOS
     # elif menu_select == 4:
