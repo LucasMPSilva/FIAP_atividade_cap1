@@ -1,4 +1,5 @@
-from IPython.display import clear_output
+import os, sys
+from tkinter import Tk
 from time import sleep
 from math import pi
 
@@ -10,6 +11,8 @@ dados = {'CULTURA':['MILHO', 'SOJA', 'SOJA'],
 # MENU
 # Boas Vindas
 # print('Bem vindo ao aplicativo da FarmTech Solution\n\n')
+
+
 
 #FUNÇÃO DESTINADA A EXIBIÇÃO DE DADOS
 def exibir_dados(dicionario):
@@ -23,8 +26,9 @@ def exibir_dados(dicionario):
 
 #FUNÇÃO DESTINADA CALCULAR A CULTURA
 def inserir_dados(loop: bool = True): 
+
     # Declarando variaveis globais
-    global area, insumo, manejo_insumo, resp_menu_1, cultura
+    global area, insumo, manejo_insumo, cultura
 
     try:
         # Declarando variavel de loop
@@ -57,41 +61,51 @@ def inserir_dados(loop: bool = True):
 
                 # CALCULE A AREA PLANTADA
                 r = int(input('DIGITE EM METROS O RAIO DA AREA: '))
-                area = pi * r ** 2
+                area = round(pi * r ** 2,2)
 
                 # CALCULE O MANEJO DE INSUMOS
                 insumo = 500
                 manejo_insumo = round(area * insumo,2)
-                
 
+            
             resp_menu_1 = int(input('\nDESEJA INSERIR DADOS\n1-SIM\n2-NAO\nR: ')) if loop == True else False
+            # if loop == False:
+            #     resp_menu_1 = 2
+            # else:
+            #     resp_menu_1 = int(input('\nDESEJA INSERIR DADOS\n1-SIM\n2-NAO\nR: '))
+
     except ValueError as error:
         print('Algo não ocorreu como deveria.\nTente novamente')
 
 
 while True:
 # LIMPEZA DO TERMINAL
-    clear_output()    
+
+    # Apresentação do menu
     print(' '*8,'MENU',' '*8,'\n','-'*22,'\n 1 - Inserir dados\n 2 - Exibir dados\n 3 - Atualizar dados\n 4 - Deletar dados\n 5 - Sair\n','-'*22)
     menu_select = int(input('Qual ação gostaria de executar?\n '))
 
     # INSERÇÃO DE DADOS
     if menu_select == 1:
-        
+        os.system('cls')
         inserir_dados()
 
         # ARMAZENE TUDO EM LISTAS
         dados['CULTURA'].append(cultura)
         dados['AREA'].append(area)
         dados['INSUMOS'].append(manejo_insumo)
-
+        os.system('cls')
     
     # EXIBIÇÃO DE DADOS
-    elif menu_select == 2:        
+    elif menu_select == 2:     
+        os.system('cls')   
         exibir_dados(dados)
-
+        
+        input('Cados deseje voltar para o Menu aperte qualquer tecla.')
+        os.system('cls')
     # ATUALIZAÇÃO DE DADOS
     elif menu_select == 3:
+        os.system('cls')
 
         # Definindo variavel de LOOP
         resp_menu_3 = 1
@@ -102,9 +116,12 @@ while True:
 
             # Definindo index que será alterado
             idx = int(input('\nEscolha os dados que deseja alterar: '))
+            if idx > len(dados):
+                raise ValueError('O valor escolhido pelo usuário não corresponde a um indice valido.')
+                continue
 
             # Definido novos dados
-            inserir_dados(False)
+            inserir_dados(loop=False)
 
             # Atualização dos dados da lista
             dados['CULTURA'][idx] = cultura
@@ -113,9 +130,11 @@ while True:
 
             resp_menu_3 = int(input('Desja atualizar mais algum dado da tabela?\n1-SIM\n2-NAO\nR: '))
 
+        os.system('cls')
 
     # EXCLUSÃO DE DADOS
     elif menu_select == 4:
+        
         resp_menu_4 = True
         while resp_menu_4 == True:
             exibir_dados(dados)
@@ -130,7 +149,7 @@ while True:
 
             # Atualização variavel de loop (utilizado para determinar se devemos continuar)
             resp_menu_3 = int(input('Desja atualizar mais algum dado da tabela?\n1-SIM\n2-NAO\nR: '))
-
+        os.system('cls')
     # # EXIT
     elif menu_select == 5:
         exit()
