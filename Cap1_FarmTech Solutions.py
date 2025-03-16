@@ -16,7 +16,7 @@ def exibir_dados(dicionario): #<- Declarando uma função nova (bloco que execut
     print('\n|INDEX|CULTURA|-----AREA-----|-----INSUMOS-----|')
 
     # Montando extrutura de pseudotabela
-    for idx in range(0, len(dicionario)): #<- Laço que identificara a quantidade de index presentes na tabela
+    for idx in range(0, len(dicionario['CULTURA'])): #<- Laço que identificara a quantidade de index presentes na tabela
         print(f"|{idx:<4} | {dicionario['CULTURA'][idx]:<5} | {dicionario['AREA'][idx]:<12} | {dicionario['INSUMOS'][idx]:<15} |") #<- Impressão de dados em formato de tabela
 
 #FUNÇÃO DESTINADA CALCULAR A CULTURA
@@ -70,6 +70,8 @@ while True: #<- Bloco de looping
     # Apresentação do menu
     print(' '*8,'MENU',' '*8,'\n','-'*22,'\n 1 - Inserir dados\n 2 - Exibir dados\n 3 - Atualizar dados\n 4 - Deletar dados\n 5 - Sair\n','-'*22)#<- Impressão do Menu / a expressão "\n" pula uma linha no print)
     menu_select = int(input('Qual ação gostaria de executar?\n ')) #<- Input da opção do menu a ser executada
+    if menu_select > 5 or menu_select < 0:
+
 
     # INSERÇÃO DE DADOS
         # Aqui será trabalhado uma das opções de execução do MENU
@@ -97,7 +99,7 @@ while True: #<- Bloco de looping
         exibir_dados(dados) #<- Chama a função "exibir_dados" que definimos anteriormente
 
         
-        input('Para voltar ao MENU aperte qualquer tecla.') #<- Input que não armazena nenhum dado em variavel. Utilizado apenas para manter a visão da tabela na opção do menu "Exibir dados"
+        input('Para voltar ao MENU pressiona ENTER.') #<- Input que não armazena nenhum dado em variavel. Utilizado apenas para manter a visão da tabela na opção do menu "Exibir dados"
         os.system('cls')#<- Realiza limpeza do terminal
 
     # ATUALIZAÇÃO DE DADOS
@@ -149,15 +151,18 @@ while True: #<- Bloco de looping
                 os.system('cls') #<- Realiza limpeza do terminal
                 print(ValueError('O valor escolhido pelo usuário não corresponde a um indice valido.')) #<- Imprime um erro caso a condição proposta acima seja verdadeira
                 sleep(1) #<- o código fica parado por 1 segundo 
+            else:
+            # Atualização dos dados da lista
 
-            # Atualização dos dados da lista 
-            del dados['CULTURA'][idx] #<- Utiliza o "del" para deletar os dados com base na variavel "idx" para acessar um indice da tabela "dados"
-            del dados['AREA'][idx] #<- Utiliza o "del" para deletar os dados com base na variavel "idx" para acessar um indice da tabela "dados"
-            del dados['INSUMOS'][idx] #<- Utiliza o "del" para deletar os dados com base na variavel "idx" para acessar um indice da tabela "dados"
+                dados['CULTURA'].pop(idx) #<- Utiliza o "pop" para deletar os dados com base na variavel "idx" para acessar um indice da tabela "dados"
+                dados['AREA'].pop(idx) #<- Utiliza o "pop" para deletar os dados com base na variavel "idx" para acessar um indice da tabela "dados"
+                dados['INSUMOS'].pop(idx) #<- Utiliza o "pop" para deletar os dados com base na variavel "idx" para acessar um indice da tabela "dados"
 
             # Atualização variavel de loop (utilizado para determinar se devemos continuar)
             resp_menu_4 = int(input('Desja atualizar mais algum dado da tabela?\n1-SIM\n2-NAO\nR: ')) #<- Input da variavel de referencia do looping para determinar se haverá continuidade da execução
+
         os.system('cls') #<- Realiza limpeza do terminal
+
     # # EXIT
     elif menu_select == 5: #<- Bloco condicional (se a variavel menu_select for igual a 5, então execute o bloco abaixo)
         exit() #<- Termina a execução
