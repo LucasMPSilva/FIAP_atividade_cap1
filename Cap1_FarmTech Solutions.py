@@ -3,9 +3,9 @@ from time import sleep #<- Importando a função sleep da biblioteca time do pyt
 from math import pi #<- importando o valor de 'pi' com biblioteca de math do python
 
 
-dados = {'CULTURA':['MILHO', 'SOJA', 'SOJA'],
-        'AREA':[210201, 520002, 2010203],
-        'INSUMOS':[431214, 345344, 546456]}#<- "Tabela de dados" do tipo dict (dictionary) onde são definidas chaves com valores. Explicando de outra forma, é como se as chaves fossem colunas e os valores fossem os dados inseridos na coluna exemplo {cultura:MILHO}
+dados = {'CULTURA':[],
+        'AREA':[],
+        'INSUMOS':[]}#<- "Tabela de dados" do tipo dict (dictionary) onde são definidas chaves com valores. Explicando de outra forma, é como se as chaves fossem colunas e os valores fossem os dados inseridos na coluna exemplo {cultura:MILHO}
 
 # MENU
 
