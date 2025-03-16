@@ -35,10 +35,11 @@ def inserir_dados(): #<- Declarando uma nova função (bloco que executará um c
         if cultura == 'MILHO': #<- Condição para inicio do bloco (se cultura for igual a MILHO)
             
             # Aviso
-            print('\nA cultura escolhida foi o milho.\nA cultura de milho tem a caracteristica de ser cultivada em uma area quadrada com fertilizante.\nA cada m² serão aplicados 100g de fertilizante.')
+            print('\nA cultura escolhida foi o milho.\nA cultura de milho tem a característica de ser cultivada em uma area quadrada com fertilizante.\nA cada m² serão aplicados 100g de fertilizante.')
 
             # CALCULE A AREA PLANTADA 
             m = float(input('DIGITE EM METROS O TAMANHO DE UM DOS LADOS DA AREA PARA CALCULAR A AREA EM M²: ')) #<-input de dados para calculo de area
+
             area = round(m ** 2, 2) #<- Calculo da area "quadrado"
 
             # CALCULE O MANEJO DE INSUMOS
@@ -49,7 +50,7 @@ def inserir_dados(): #<- Declarando uma nova função (bloco que executará um c
         elif cultura == 'SOJA': #<- Condição para inicio do bloco (se cultura for igual a SOJA)
 
             # Aviso
-            print('\nA cultura escolhida foi o soja.\nA cultura de soja tem a caracteristica de ser cultivada em uma area redonda com fertilizante.\nA cada m² serão pulverizados 500ml de defensivo de soja.')
+            print('\nA cultura escolhida foi o soja.\nA cultura de soja tem a característica de ser cultivada em uma área redonda com fertilizante.\nA cada m² serão pulverizados 500ml de defensivo de soja.')
 
             # CALCULE A AREA PLANTADA
             r = float(input('DIGITE EM METROS O RAIO DA AREA: ')) #<-input de dados para calculo de area
@@ -75,7 +76,7 @@ while True: #<- Bloco de looping
 
         if menu_select > 5 or menu_select < 1: #< Valida se a opção digitada pelo usuaria está entra 5 e 1 (opções de menu)
             os.system('cls') #<- Realiza limpeza do terminalos.system('cls') #<- Realiza limpeza do terminal
-            print('O valor escolhido pelo usuário não corresponde a um indice valido.') #<- Imprime um erro caso a condição proposta acima seja verdadeira
+            print('O valor escolhido pelo usuário não corresponde a um índice válido.') #<- Imprime um erro caso a condição proposta acima seja verdadeira
             sleep(1) #<- o código fica parado por 1 segundo 
 
         else:
@@ -104,7 +105,7 @@ while True: #<- Bloco de looping
                 exibir_dados(dados) #<- Chama a função "exibir_dados" que definimos anteriormente
 
                 
-                input('Para voltar ao MENU pressiona ENTER.') #<- Input que não armazena nenhum dado em variavel. Utilizado apenas para manter a visão da tabela na opção do menu "Exibir dados"
+                input('Para voltar ao MENU pressione ENTER.') #<- Input que não armazena nenhum dado em variavel. Utilizado apenas para manter a visão da tabela na opção do menu "Exibir dados"
                 os.system('cls')#<- Realiza limpeza do terminal
 
             # ATUALIZAÇÃO DE DADOS
@@ -124,7 +125,7 @@ while True: #<- Bloco de looping
                     # Condição para validação de index existente
                     if idx > len(dados)-1 or idx < 0: #< Condicional que verifica se o indice indicado pelo usuário é do que o maior indice apresentado na tabela (len(dados) exibe a quantidade de linhas (indices) presentes na tabela) / ATENÇÃO: Essa não é uma boa forma de executar a proposta, pois pode gerar erros em casos onde o programa tenha que ser mais trabalhado, entretanto, para esse casso funcionará.
                         os.system('cls') #<- Realiza limpeza do terminal
-                        print('O valor escolhido pelo usuário não corresponde a um indice valido.') #<- Imprime um erro caso a condição proposta acima seja verdadeira
+                        print('O valor escolhido pelo usuário não corresponde a um índice válido.') #<- Imprime um erro caso a condição proposta acima seja verdadeira
                         sleep(1) #<- o código fica parado por 1 segundo 
 
                     else:
@@ -136,7 +137,7 @@ while True: #<- Bloco de looping
                         dados['AREA'][idx] = area #<- Utiliza a variavel "idx" para acessar um indice da tabela "dados" e aplicar outro valor utilizando o operador de atribuição "="
                         dados['INSUMOS'][idx] = manejo_insumo #<- Utiliza a variavel "idx" para acessar um indice da tabela "dados" e aplicar outro valor utilizando o operador de atribuição "="
 
-                    resp_menu_3 = int(input('Desja atualizar mais algum dado da tabela?\n1-SIM\n2-NAO\nR: ')) #<- Input da variavel de referencia do looping para determinar se haverá continuidade da execução
+                    resp_menu_3 = int(input('Deseja atualizar mais algum dado da tabela?\n1-SIM\n2-NAO\nR: ')) #<- Input da variavel de referencia do looping para determinar se haverá continuidade da execução
 
                 os.system('cls') #<- Chama a função "exibir_dados" que definimos anteriormente
 
@@ -154,7 +155,7 @@ while True: #<- Bloco de looping
                     # Condição para validação de index existente
                     if idx > len(dados)-1 or idx < 0: #< Condicional que verifica se o indice indicado pelo usuário é do que o maior indice apresentado na tabela (len(dados) exibe a quantidade de linhas (indices) presentes na tabela) / ATENÇÃO: Essa não é uma boa forma de executar a proposta, pois pode gerar erros em casos onde o programa tenha que ser mais trabalhado, entretanto, para esse casso funcionará.
                         os.system('cls') #<- Realiza limpeza do terminal
-                        print('O valor escolhido pelo usuário não corresponde a um indice valido.') #<- Imprime um erro caso a condição proposta acima seja verdadeira
+                        print('O valor escolhido pelo usuário não corresponde a um índice válido.') #<- Imprime um erro caso a condição proposta acima seja verdadeira
                         sleep(1) #<- o código fica parado por 1 segundo 
                     else:
                     # Atualização dos dados da lista
@@ -164,7 +165,7 @@ while True: #<- Bloco de looping
                         dados['INSUMOS'].pop(idx) #<- Utiliza o "pop" para deletar os dados com base na variavel "idx" para acessar um indice da tabela "dados"
 
                     # Atualização variavel de loop (utilizado para determinar se devemos continuar)
-                    resp_menu_4 = int(input('Desja atualizar mais algum dado da tabela?\n1-SIM\n2-NAO\nR: ')) #<- Input da variavel de referencia do looping para determinar se haverá continuidade da execução
+                    resp_menu_4 = int(input('Deseja atualizar mais algum dado da tabela?\n1-SIM\n2-NAO\nR: ')) #<- Input da variavel de referencia do looping para determinar se haverá continuidade da execução
 
                 os.system('cls') #<- Realiza limpeza do terminal
 
@@ -174,7 +175,7 @@ while True: #<- Bloco de looping
             
     except ValueError:#<- except faz parte do bloco "try". Aqui é onde indicamos a excessão (erro) que pode iniciar o codigo dentro desse bloco
         os.system('cls') #<- Realiza limpeza do terminal
-        print('O valor escolhido pelo usuário não corresponde a um indice valido.')
+        print('O valor escolhido pelo usuário não corresponde a um índice válido.')
         sleep(2) #<- o código fica parado por 2 segundo
         os.system('cls') #<- Realiza limpeza do terminal
 
