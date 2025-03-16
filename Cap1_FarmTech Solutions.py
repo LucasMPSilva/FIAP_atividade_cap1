@@ -25,57 +25,47 @@ def exibir_dados(dicionario):
         print(f"|{idx:<4} | {dicionario['CULTURA'][idx]:<5} | {dicionario['AREA'][idx]:<12} | {dicionario['INSUMOS'][idx]:<15} |")
 
 #FUNÇÃO DESTINADA CALCULAR A CULTURA
-def inserir_dados(loop: bool = True): 
+def inserir_dados(): 
 
     # Declarando variaveis globais
     global area, insumo, manejo_insumo, cultura
 
-    try:
-        # Declarando variavel de loop
-        resp_menu_1 = True
-
+    # Tentativa
+    try: #<- try é um comando built in do Python cujo ele vai iniciar um bloco de tentantiva de execução do código
         # Input da cultura a ser utilizada
         cultura = input('DIGITE A CULTURA QUE DESEJA INCLUIR:\nMILHO\nSOJA\nR:').upper()
 
-        while resp_menu_1 == True:
-
-            # MILHO
-            if cultura == 'MILHO':
-                
-                # Aviso
-                print('\nA cultura escolhida foir o milho.\nA cultura de milho tem a caracteristica de ser cultivada em uma area quadrada com fertilizante.\nA cada m² serão aplicados 100g de fertilizante.')
-
-                # CALCULE A AREA PLANTADA 
-                m = int(input('DIGITE EM METROS O TAMANHO DE UM DOS LADOS DA AREA PARA CALCULAR A AREA EM M²: '))
-                area = round(m ** 2, 2)
-
-                # CALCULE O MANEJO DE INSUMOS
-                insumo = 100
-                manejo_insumo = round(area * insumo,2)
-
-            # SOJA
-            elif cultura == 'SOJA':
-
-                # Aviso
-                print('\nA cultura escolhida foir o soja.\nA cultura de soja tem a caracteristica de ser cultivada em uma area redonda com fertilizante.\nA cada m² serão pulverizados 500ml de defensivo de soja.')
-
-                # CALCULE A AREA PLANTADA
-                r = int(input('DIGITE EM METROS O RAIO DA AREA: '))
-                area = round(pi * r ** 2,2)
-
-                # CALCULE O MANEJO DE INSUMOS
-                insumo = 500
-                manejo_insumo = round(area * insumo,2)
-
+        # MILHO
+        if cultura == 'MILHO':
             
-            resp_menu_1 = int(input('\nDESEJA INSERIR DADOS\n1-SIM\n2-NAO\nR: ')) if loop == True else False
-            # if loop == False:
-            #     resp_menu_1 = 2
-            # else:
-            #     resp_menu_1 = int(input('\nDESEJA INSERIR DADOS\n1-SIM\n2-NAO\nR: '))
+            # Aviso
+            print('\nA cultura escolhida foi o milho.\nA cultura de milho tem a caracteristica de ser cultivada em uma area quadrada com fertilizante.\nA cada m² serão aplicados 100g de fertilizante.')
 
-    except ValueError as error:
-        print('Algo não ocorreu como deveria.\nTente novamente')
+            # CALCULE A AREA PLANTADA 
+            m = int(input('DIGITE EM METROS O TAMANHO DE UM DOS LADOS DA AREA PARA CALCULAR A AREA EM M²: '))
+            area = round(m ** 2, 2)
+
+            # CALCULE O MANEJO DE INSUMOS
+            insumo = 100
+            manejo_insumo = round(area * insumo,2)
+
+        # SOJA
+        elif cultura == 'SOJA':
+
+            # Aviso
+            print('\nA cultura escolhida foi o soja.\nA cultura de soja tem a caracteristica de ser cultivada em uma area redonda com fertilizante.\nA cada m² serão pulverizados 500ml de defensivo de soja.')
+
+            # CALCULE A AREA PLANTADA
+            r = int(input('DIGITE EM METROS O RAIO DA AREA: '))
+            area = round(pi * r ** 2,2)
+
+            # CALCULE O MANEJO DE INSUMOS
+            insumo = 500
+            manejo_insumo = round(area * insumo,2)
+
+    # Excessao
+    except ValueError as error: #<- except faz parte do bloco "try". Aqui é onde indicamos a excessão (erro) que pode iniciar o codigo dentro desse bloco
+        print('Algo não ocorreu como deveria.\nTente novamente') #<- Comando presente
 
 
 while True:
@@ -88,13 +78,21 @@ while True:
     # INSERÇÃO DE DADOS
     if menu_select == 1:
         os.system('cls')
-        inserir_dados()
 
-        # ARMAZENE TUDO EM LISTAS
-        dados['CULTURA'].append(cultura)
-        dados['AREA'].append(area)
-        dados['INSUMOS'].append(manejo_insumo)
-        os.system('cls')
+         # Declarando variavel de loop
+        resp_menu_1 = True
+        
+        while resp_menu_1 == True:
+            inserir_dados()
+
+            # ARMAZENE TUDO EM LISTAS
+            dados['CULTURA'].append(cultura)
+            dados['AREA'].append(area)
+            dados['INSUMOS'].append(manejo_insumo)
+            os.system('cls')
+
+            resp_menu_1 = int(input('\nDESEJA INSERIR DADOS\n1-SIM\n2-NAO\nR: '))
+
     
     # EXIBIÇÃO DE DADOS
     elif menu_select == 2:     
@@ -116,12 +114,16 @@ while True:
 
             # Definindo index que será alterado
             idx = int(input('\nEscolha os dados que deseja alterar: '))
+
+            # Condição para validação de index existente
             if idx > len(dados):
-                raise ValueError('O valor escolhido pelo usuário não corresponde a um indice valido.')
+                os.system('cls')
+                print(ValueError('O valor escolhido pelo usuário não corresponde a um indice valido.'))
+                sleep(1)
                 continue
 
             # Definido novos dados
-            inserir_dados(loop=False)
+            inserir_dados()
 
             # Atualização dos dados da lista
             dados['CULTURA'][idx] = cultura
@@ -142,13 +144,19 @@ while True:
             # Definindo index que será alterado
             idx = int(input('\nEscolha os dados que deseja excluir da tabela: '))
 
+            # Condição para validação de index existente
+            if idx > len(dados):
+                os.system('cls')
+                print(ValueError('O valor escolhido pelo usuário não corresponde a um indice valido.'))
+                sleep(1)
+
             # Atualização dos dados da lista
             del dados['CULTURA'][idx] 
             del dados['AREA'][idx]
             del dados['INSUMOS'][idx] 
 
             # Atualização variavel de loop (utilizado para determinar se devemos continuar)
-            resp_menu_3 = int(input('Desja atualizar mais algum dado da tabela?\n1-SIM\n2-NAO\nR: '))
+            resp_menu_4 = int(input('Desja atualizar mais algum dado da tabela?\n1-SIM\n2-NAO\nR: '))
         os.system('cls')
     # # EXIT
     elif menu_select == 5:
