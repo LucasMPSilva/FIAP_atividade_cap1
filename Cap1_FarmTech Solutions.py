@@ -71,101 +71,103 @@ while True: #<- Bloco de looping
     print(' '*8,'MENU',' '*8,'\n','-'*22,'\n 1 - Inserir dados\n 2 - Exibir dados\n 3 - Atualizar dados\n 4 - Deletar dados\n 5 - Sair\n','-'*22)#<- Impressão do Menu / a expressão "\n" pula uma linha no print)
     menu_select = int(input('Qual ação gostaria de executar?\n ')) #<- Input da opção do menu a ser executada
     if menu_select > 5 or menu_select < 0:
+        os.system('cls') #<- Realiza limpeza do terminalos.system('cls') #<- Realiza limpeza do terminal
+        print(ValueError('O valor escolhido pelo usuário não corresponde a um indice valido.')) #<- Imprime um erro caso a condição proposta acima seja verdadeira
+        sleep(1) #<- o código fica parado por 1 segundo 
 
-
+    else:
     # INSERÇÃO DE DADOS
         # Aqui será trabalhado uma das opções de execução do MENU
-    if menu_select == 1: #<- Bloco condicional (se a variavel menu_select for igual a 1, então execute o bloco abaixo)
-        os.system('cls') #<- Realiza limpeza do terminal
-
-         # Declarando variavel de loop
-        resp_menu_1 = True #<- Variavel referencia para looping (variavel booleana)
-        
-        while resp_menu_1 == True: #<- Bloco de looping (enquanto resp_menu_1 for verdadeiro, o este bloco será executado)
-            inserir_dados() #<- Chama a função "inserir_dados" que definimos anteriormente
-
-            # ARMAZENE TUDO EM LISTAS
-            dados['CULTURA'].append(cultura) #<- Inserção dos dados da variavel global "cultura" (definida na função "inserir_dados) na tabela
-            dados['AREA'].append(area) #<- Inserção dos dados da variavel global "area" (definida na função "inserir_dados) na tabela
-            dados['INSUMOS'].append(manejo_insumo) #<- Inserção dos dados da variavel global "manejo_insumo" (definida na função "inserir_dados) na tabela
-            os.system('cls') #<- Realiza limpeza do terminal
-
-            resp_menu_1 = int(input('\nDESEJA INSERIR DADOS\n1-SIM\n2-NAO\nR: ')) #<- Input da variavel de referencia do looping para determinar se haverá continuidade da execução
-
-    
-    # EXIBIÇÃO DE DADOS
-    elif menu_select == 2: #<- Bloco condicional (se a variavel menu_select for igual a 2, então execute o bloco abaixo)
-        os.system('cls') #<- Realiza limpeza do terminal
-        exibir_dados(dados) #<- Chama a função "exibir_dados" que definimos anteriormente
-
-        
-        input('Para voltar ao MENU pressiona ENTER.') #<- Input que não armazena nenhum dado em variavel. Utilizado apenas para manter a visão da tabela na opção do menu "Exibir dados"
-        os.system('cls')#<- Realiza limpeza do terminal
-
-    # ATUALIZAÇÃO DE DADOS
-    elif menu_select == 3: #<- Bloco condicional (se a variavel menu_select for igual a 3, então execute o bloco abaixo)
-        os.system('cls') #<- Realiza limpeza do terminal
-
-        # Definindo variavel de LOOP
-        resp_menu_3 = 1 #<- Variavel referencia para looping (variavel booleana)
-
-        # Looping de atualização de dados
-        while resp_menu_3 == True: #<- Bloco de looping (enquanto resp_menu_3 for verdadeiro, o este bloco será executado)
-            exibir_dados(dados) #<- Chama a função "exibir_dados" que definimos anteriormente
-
-            # Definindo index que será alterado
-            idx = int(input('\nEscolha os dados que deseja alterar: ')) #<- Input de dados para definir qual indice será alterado
-
-            # Condição para validação de index existente
-            if idx > len(dados)-1 or idx < 0: #< Condicional que verifica se o indice indicado pelo usuário é do que o maior indice apresentado na tabela (len(dados) exibe a quantidade de linhas (indices) presentes na tabela) / ATENÇÃO: Essa não é uma boa forma de executar a proposta, pois pode gerar erros em casos onde o programa tenha que ser mais trabalhado, entretanto, para esse casso funcionará.
-                os.system('cls') #<- Realiza limpeza do terminal
-                print(ValueError('O valor escolhido pelo usuário não corresponde a um indice valido.')) #<- Imprime um erro caso a condição proposta acima seja verdadeira
-                sleep(1) #<- o código fica parado por 1 segundo 
-
-            else:
-                # Definido novos dados
+        if menu_select == 1: #<- Bloco condicional (se a variavel menu_select for igual a 1, então execute o bloco abaixo)
+            
+            # Declarando variavel de loop
+            resp_menu_1 = True #<- Variavel referencia para looping (variavel booleana)
+            
+            while resp_menu_1 == True: #<- Bloco de looping (enquanto resp_menu_1 for verdadeiro, o este bloco será executado)
                 inserir_dados() #<- Chama a função "inserir_dados" que definimos anteriormente
 
-                # Atualização dos dados da lista
-                dados['CULTURA'][idx] = cultura #<- Utiliza a variavel "idx" para acessar um indice da tabela "dados" e aplicar o valor da variavel global "cultura" utilizando o operador de atribuição "="
-                dados['AREA'][idx] = area #<- Utiliza a variavel "idx" para acessar um indice da tabela "dados" e aplicar outro valor utilizando o operador de atribuição "="
-                dados['INSUMOS'][idx] = manejo_insumo #<- Utiliza a variavel "idx" para acessar um indice da tabela "dados" e aplicar outro valor utilizando o operador de atribuição "="
+                # ARMAZENE TUDO EM LISTAS
+                dados['CULTURA'].append(cultura) #<- Inserção dos dados da variavel global "cultura" (definida na função "inserir_dados) na tabela
+                dados['AREA'].append(area) #<- Inserção dos dados da variavel global "area" (definida na função "inserir_dados) na tabela
+                dados['INSUMOS'].append(manejo_insumo) #<- Inserção dos dados da variavel global "manejo_insumo" (definida na função "inserir_dados) na tabela
+                os.system('cls') #<- Realiza limpeza do terminal
 
-            resp_menu_3 = int(input('Desja atualizar mais algum dado da tabela?\n1-SIM\n2-NAO\nR: ')) #<- Input da variavel de referencia do looping para determinar se haverá continuidade da execução
+                resp_menu_1 = int(input('\nDESEJA INSERIR DADOS\n1-SIM\n2-NAO\nR: ')) #<- Input da variavel de referencia do looping para determinar se haverá continuidade da execução
 
-        os.system('cls') #<- Chama a função "exibir_dados" que definimos anteriormente
-
-
-    # EXCLUSÃO DE DADOS
-    elif menu_select == 4: #<- Bloco condicional (se a variavel menu_select for igual a 4, então execute o bloco abaixo)
-        
-        resp_menu_4 = True #<- Variavel referencia para looping (variavel booleana)
-        while resp_menu_4 == True: #<- Bloco de looping (enquanto resp_menu_4 for verdadeiro, o este bloco será executado)
+    
+        # EXIBIÇÃO DE DADOS
+        elif menu_select == 2: #<- Bloco condicional (se a variavel menu_select for igual a 2, então execute o bloco abaixo)
+            os.system('cls') #<- Realiza limpeza do terminal
             exibir_dados(dados) #<- Chama a função "exibir_dados" que definimos anteriormente
 
-            # Definindo index que será alterado
-            idx = int(input('\nEscolha os dados que deseja excluir da tabela: ')) #<- Input de dados para definir qual indice será alterado
+            
+            input('Para voltar ao MENU pressiona ENTER.') #<- Input que não armazena nenhum dado em variavel. Utilizado apenas para manter a visão da tabela na opção do menu "Exibir dados"
+            os.system('cls')#<- Realiza limpeza do terminal
 
-            # Condição para validação de index existente
-            if idx > len(dados)-1 or idx < 0: #< Condicional que verifica se o indice indicado pelo usuário é do que o maior indice apresentado na tabela (len(dados) exibe a quantidade de linhas (indices) presentes na tabela) / ATENÇÃO: Essa não é uma boa forma de executar a proposta, pois pode gerar erros em casos onde o programa tenha que ser mais trabalhado, entretanto, para esse casso funcionará.
-                os.system('cls') #<- Realiza limpeza do terminal
-                print(ValueError('O valor escolhido pelo usuário não corresponde a um indice valido.')) #<- Imprime um erro caso a condição proposta acima seja verdadeira
-                sleep(1) #<- o código fica parado por 1 segundo 
-            else:
-            # Atualização dos dados da lista
+        # ATUALIZAÇÃO DE DADOS
+        elif menu_select == 3: #<- Bloco condicional (se a variavel menu_select for igual a 3, então execute o bloco abaixo)
+            os.system('cls') #<- Realiza limpeza do terminal
 
-                dados['CULTURA'].pop(idx) #<- Utiliza o "pop" para deletar os dados com base na variavel "idx" para acessar um indice da tabela "dados"
-                dados['AREA'].pop(idx) #<- Utiliza o "pop" para deletar os dados com base na variavel "idx" para acessar um indice da tabela "dados"
-                dados['INSUMOS'].pop(idx) #<- Utiliza o "pop" para deletar os dados com base na variavel "idx" para acessar um indice da tabela "dados"
+            # Definindo variavel de LOOP
+            resp_menu_3 = 1 #<- Variavel referencia para looping (variavel booleana)
 
-            # Atualização variavel de loop (utilizado para determinar se devemos continuar)
-            resp_menu_4 = int(input('Desja atualizar mais algum dado da tabela?\n1-SIM\n2-NAO\nR: ')) #<- Input da variavel de referencia do looping para determinar se haverá continuidade da execução
+            # Looping de atualização de dados
+            while resp_menu_3 == True: #<- Bloco de looping (enquanto resp_menu_3 for verdadeiro, o este bloco será executado)
+                exibir_dados(dados) #<- Chama a função "exibir_dados" que definimos anteriormente
 
-        os.system('cls') #<- Realiza limpeza do terminal
+                # Definindo index que será alterado
+                idx = int(input('\nEscolha os dados que deseja alterar: ')) #<- Input de dados para definir qual indice será alterado
 
-    # # EXIT
-    elif menu_select == 5: #<- Bloco condicional (se a variavel menu_select for igual a 5, então execute o bloco abaixo)
-        exit() #<- Termina a execução
+                # Condição para validação de index existente
+                if idx > len(dados)-1 or idx < 0: #< Condicional que verifica se o indice indicado pelo usuário é do que o maior indice apresentado na tabela (len(dados) exibe a quantidade de linhas (indices) presentes na tabela) / ATENÇÃO: Essa não é uma boa forma de executar a proposta, pois pode gerar erros em casos onde o programa tenha que ser mais trabalhado, entretanto, para esse casso funcionará.
+                    os.system('cls') #<- Realiza limpeza do terminal
+                    print(ValueError('O valor escolhido pelo usuário não corresponde a um indice valido.')) #<- Imprime um erro caso a condição proposta acima seja verdadeira
+                    sleep(1) #<- o código fica parado por 1 segundo 
+
+                else:
+                    # Definido novos dados
+                    inserir_dados() #<- Chama a função "inserir_dados" que definimos anteriormente
+
+                    # Atualização dos dados da lista
+                    dados['CULTURA'][idx] = cultura #<- Utiliza a variavel "idx" para acessar um indice da tabela "dados" e aplicar o valor da variavel global "cultura" utilizando o operador de atribuição "="
+                    dados['AREA'][idx] = area #<- Utiliza a variavel "idx" para acessar um indice da tabela "dados" e aplicar outro valor utilizando o operador de atribuição "="
+                    dados['INSUMOS'][idx] = manejo_insumo #<- Utiliza a variavel "idx" para acessar um indice da tabela "dados" e aplicar outro valor utilizando o operador de atribuição "="
+
+                resp_menu_3 = int(input('Desja atualizar mais algum dado da tabela?\n1-SIM\n2-NAO\nR: ')) #<- Input da variavel de referencia do looping para determinar se haverá continuidade da execução
+
+            os.system('cls') #<- Chama a função "exibir_dados" que definimos anteriormente
+
+
+        # EXCLUSÃO DE DADOS
+        elif menu_select == 4: #<- Bloco condicional (se a variavel menu_select for igual a 4, então execute o bloco abaixo)
+            
+            resp_menu_4 = True #<- Variavel referencia para looping (variavel booleana)
+            while resp_menu_4 == True: #<- Bloco de looping (enquanto resp_menu_4 for verdadeiro, o este bloco será executado)
+                exibir_dados(dados) #<- Chama a função "exibir_dados" que definimos anteriormente
+
+                # Definindo index que será alterado
+                idx = int(input('\nEscolha os dados que deseja excluir da tabela: ')) #<- Input de dados para definir qual indice será alterado
+
+                # Condição para validação de index existente
+                if idx > len(dados)-1 or idx < 0: #< Condicional que verifica se o indice indicado pelo usuário é do que o maior indice apresentado na tabela (len(dados) exibe a quantidade de linhas (indices) presentes na tabela) / ATENÇÃO: Essa não é uma boa forma de executar a proposta, pois pode gerar erros em casos onde o programa tenha que ser mais trabalhado, entretanto, para esse casso funcionará.
+                    os.system('cls') #<- Realiza limpeza do terminal
+                    print(ValueError('O valor escolhido pelo usuário não corresponde a um indice valido.')) #<- Imprime um erro caso a condição proposta acima seja verdadeira
+                    sleep(1) #<- o código fica parado por 1 segundo 
+                else:
+                # Atualização dos dados da lista
+
+                    dados['CULTURA'].pop(idx) #<- Utiliza o "pop" para deletar os dados com base na variavel "idx" para acessar um indice da tabela "dados"
+                    dados['AREA'].pop(idx) #<- Utiliza o "pop" para deletar os dados com base na variavel "idx" para acessar um indice da tabela "dados"
+                    dados['INSUMOS'].pop(idx) #<- Utiliza o "pop" para deletar os dados com base na variavel "idx" para acessar um indice da tabela "dados"
+
+                # Atualização variavel de loop (utilizado para determinar se devemos continuar)
+                resp_menu_4 = int(input('Desja atualizar mais algum dado da tabela?\n1-SIM\n2-NAO\nR: ')) #<- Input da variavel de referencia do looping para determinar se haverá continuidade da execução
+
+            os.system('cls') #<- Realiza limpeza do terminal
+
+        # # EXIT
+        elif menu_select == 5: #<- Bloco condicional (se a variavel menu_select for igual a 5, então execute o bloco abaixo)
+            exit() #<- Termina a execução
 
 
 
